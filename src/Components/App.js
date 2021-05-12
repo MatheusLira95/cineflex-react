@@ -1,11 +1,11 @@
-
-
 import TopBar from "./TopBar";
+import FilmList from "./FilmList";
 export default function App(){
     return(
         <>
-            <h1>Hello!!!!!!!!!</h1>
             <TopBar />
+            <FilmList />
+
         </>
     );
 }
