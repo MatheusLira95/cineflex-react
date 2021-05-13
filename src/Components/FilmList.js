@@ -1,16 +1,26 @@
-import filme from "../images/film2067.png"; 
+import { Link } from "react-router-dom";
+import TopBar from "./TopBar";
 
 
-export default function FilmList(){
+
+export default function FilmList({ films }){
+    
     return (
-        <div className="container">
-            <div className="title">Selecione o filme</div>
-            <ul className="films-list">
-                <li className="film-item"><img src={filme} alt="Film 2067"/></li>
-                <li className="film-item"><img src={filme} alt="Film 2067"/></li>
-                <li className="film-item"><img src={filme} alt="Film 2067"/></li>
-                <li className="film-item"><img src={filme} alt="Film 2067"/></li>
-            </ul>
-        </div>
+        <>
+            <TopBar />
+            <div className="container">
+                <div className="title">Selecione o filme</div>
+                <ul className="films-list">
+                    {films.map(film => {
+                        return(
+                            <Link to={`/sessoes/${film.id}`}>
+                                <li className="film-item" key={film.id}><img src={film.posterURL} alt="Film 2067"/></li>
+                            </Link>
+                        );
+                    })
+                    }
+                </ul>
+            </div>
+        </>
     );
 }

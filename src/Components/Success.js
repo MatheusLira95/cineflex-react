@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
+import TopBar from "./TopBar"
 import Button from "./Button";
 
 export default function Success(){
     return(
         <>
+            <TopBar />
             <div className="container">
                 <div className="title success">Pedido feito com sucesso!</div>
                 <div className="success-sections">
@@ -28,7 +31,9 @@ export default function Success(){
                         </div>
                     </div> 
                 </div>
-                <Button>Voltar para Home</Button>
+                <Link to="/">
+                    <Button>Voltar para Home</Button>
+                </Link>
                                    
             </div>
         </>

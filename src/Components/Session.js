@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
+import TopBar from "./TopBar";
 import Button from "./Button";
 
 export default function Session(){
     return(
         <>
+            <TopBar/>
             <div className="container">
                 <div className="title">Selecione o(s) assento(s)</div>
                 <div className="grid-container">
@@ -48,7 +51,9 @@ export default function Session(){
                     <span>CPF do comprador</span>
                     <input type="text" placeholder="Digite seu CPF..."></input>
                 </div>
-                <Button>Reservar assentos</Button>
+                <Link to="/sucesso">
+                    <Button>Reservar assentos</Button>
+                </Link>
             </div>
         </>
     );
