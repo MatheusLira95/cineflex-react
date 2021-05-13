@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import TopBar from "./TopBar";
 import Button from "./Button";
+import Subtitles from "./Subtitles";
 import { useEffect } from "react";
 
 export default function Session({ filmId, films, filmSessions, setSeats, seats }){
@@ -19,7 +20,10 @@ export default function Session({ filmId, films, filmSessions, setSeats, seats }
     if(!seats){
         setSeats(seats);
         return(
-            <div>CARREGANDO!!!</div>
+            <>
+                <TopBar />
+                <div className="loading">CARREGANDO!!!</div> 
+            </>    
         )
     }
     return(
@@ -34,20 +38,7 @@ export default function Session({ filmId, films, filmSessions, setSeats, seats }
                         );
                     })}                    
                 </div>
-                <div className="subtitles">
-                    <div className="subtitle">
-                        <div className="grid-item selected"></div>
-                        <span>Selecionado</span>
-                    </div>
-                    <div className="subtitle">
-                        <div className="grid-item avaible"></div>
-                        <span>Disponível</span>
-                    </div>
-                    <div className="subtitle">
-                        <div className="grid-item unavaible"></div>
-                        <span>Indisponível</span>
-                    </div>
-                </div>
+                <Subtitles />
                 <div className="buyer-datas">
                     <span>Nome do comprador:</span>
                     <input type="text" placeholder="Digite seu nome..."></input>
