@@ -5,11 +5,12 @@ import TopBar from "./TopBar";
 import filme from "../images/film2067.png"; 
 import { useEffect } from "react";
 
-export default function Film({ filmSessions, setFilmSessions }){
-    console.log(filmSessions) 
-    const params = useParams();
+export default function Film({ filmSessions, setFilmSessions, films, setFilmId }){
+    
+    const { idFilme } = useParams();
+    setFilmId(idFilme)
     useEffect(() => {
-        const requestDays = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/cineflex/movies/${params.idFilme}/showtimes`)
+        const requestDays = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/cineflex/movies/${idFilme}/showtimes`)
         requestDays.then((resp) => {
         setFilmSessions([...resp.data.days]);  
     })
@@ -39,8 +40,8 @@ export default function Film({ filmSessions, setFilmSessions }){
                     })}                                  
                 </ul>
                 <div className="bottom-bar">  
-                    <div className="selected-film"><img src={filme} alt="Filme 2067" /></div>         
-                    <span>NOME DO FILME</span>
+                    <div className="selected-film"><img src={films[idFilme-1].posterURL} alt="Filme 2067" /></div>         
+                    <span>{films[idFilme-1].title}</span>
                 </div>  
             </div>
         </>

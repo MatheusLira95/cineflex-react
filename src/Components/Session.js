@@ -1,35 +1,38 @@
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import TopBar from "./TopBar";
 import Button from "./Button";
+import { useEffect } from "react";
 
-export default function Session(){
+export default function Session({ filmId, films, filmSessions, setSeats, seats }){
+    const { idSessao } = useParams();
+    // const exactSession = filmSessions.find(session => session.id)
+
+    useEffect(() => {
+        const requestSessao = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/cineflex/showtimes/${idSessao}/seats`)
+        requestSessao.then((resp) => {
+            setSeats(resp.data)
+        })
+    },[])
+
+    if(!seats){
+        setSeats(seats);
+        return(
+            <div>CARREGANDO!!!</div>
+        )
+    }
     return(
         <>
             <TopBar/>
             <div className="container">
                 <div className="title">Selecione o(s) assento(s)</div>
                 <div className="grid-container">
-                    <div className="grid-item avaible">1</div>
-                    <div className="grid-item avaible">2</div>
-                    <div className="grid-item avaible">3</div>
-                    <div className="grid-item avaible">4</div>
-                    <div className="grid-item avaible">5</div>
-                    <div className="grid-item avaible">6</div>
-                    <div className="grid-item avaible">7</div>
-                    <div className="grid-item avaible">8</div>
-                    <div className="grid-item avaible">9</div>
-                    <div className="grid-item avaible">10</div>
-                    <div className="grid-item avaible">11</div>
-                    <div className="grid-item avaible">12</div>
-                    <div className="grid-item avaible">13</div>
-                    <div className="grid-item avaible">14</div>
-                    <div className="grid-item avaible">15</div>
-                    <div className="grid-item avaible">16</div>
-                    <div className="grid-item avaible">17</div>
-                    <div className="grid-item avaible">18</div>
-                    <div className="grid-item avaible">19</div>
-                    <div className="grid-item avaible">20</div>
-                    <div className="grid-item avaible">21</div>
+                    {seats.seats.map(seat => {
+                        return(
+                            <div className={`grid-item ${seat.isAvailable ? "avaible" : "unavaible"}`}>{seat.name}</div>
+                        );
+                    })}                    
                 </div>
                 <div className="subtitles">
                     <div className="subtitle">
@@ -43,7 +46,7 @@ export default function Session(){
                     <div className="subtitle">
                         <div className="grid-item unavaible"></div>
                         <span>Indisponível</span>
-                    </div>                    
+                    </div>
                 </div>
                 <div className="buyer-datas">
                     <span>Nome do comprador:</span>
@@ -54,6 +57,13 @@ export default function Session(){
                 <Link to="/sucesso">
                     <Button>Reservar assentos</Button>
                 </Link>
+                <div className="bottom-bar">
+                    <div className="selected-film"><img src={films[filmId-1].posterURL} alt="Filme 2067" /></div>
+                    <div>
+                        <span>{films[filmId-1].title}</span>
+                        <span>{seats.day.weekday} - {seats.name} </span>
+                    </div>
+                </div>
             </div>
         </>
     );
