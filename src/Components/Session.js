@@ -6,7 +6,7 @@ import TopBar from "./TopBar";
 import Subtitles from "./Subtitles";
 import { useEffect } from "react";
 
-export default function Session({ filmId, films, setSeats, seats, selected, setSelected, name, cpf, setName, setCpf }){
+export default function Session({ filmId, films, setSeats, seats, selected, setSelected, name, cpf, setName, setCpf, setNumsSeat, numsSeat }){
     const { idSessao } = useParams();
     
     
@@ -29,20 +29,33 @@ export default function Session({ filmId, films, setSeats, seats, selected, setS
     }
     function reserveSeat(i, seat){
         if(!selected.find(id => id === seat.id) && seat.isAvailable){
-            setSelected([...selected, seat.id]);            
+            setSelected([...selected, seat.id]); 
+            setNumsSeat([...numsSeat, seat.name ])
+                      
         }else if(selected.find(id => id === seat.id)){
             selected.splice(selected.indexOf(seat.id), 1)
             setSelected([...selected])
+            numsSeat.splice(numsSeat.indexOf(seat.name), 1)
+            setNumsSeat([...numsSeat])
         }
     }
-
+    console.log(numsSeat) 
     function checkOut(){
         const data = {ids: selected, name: name, cpf: cpf};
-        console.log(data)
         const requestCheckOut = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/cineflex/seats/book-many', data)
-        requestCheckOut.then(() => alert("Success"))
+        requestCheckOut.then(() => console.log("Success"))
     }
-    
+    function validateSeats(){
+        const arr = [];
+        for(let i = 0; i < selected.length; i++){
+            for(let j = 0; j < seats.seats.length; j++){
+                if(selected[i] === seats.seats[j].id){
+                    arr.push(seats.seats[j].name)
+                }
+            }
+        }
+        setNumsSeat([...arr]);
+    }
     
     
     return(

@@ -1,12 +1,11 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import TopBar from "./TopBar"
 
 
-export default function Success({name, cpf, selected, films, filmSessions, filmId}){
-    function testarPagina(){
-        console.log(filmSessions)
-    }
-
+export default function Success({name, cpf, seats, films, filmId, numsSeat}){
+    
+    
     return(
         <>
             <TopBar />
@@ -17,14 +16,19 @@ export default function Success({name, cpf, selected, films, filmSessions, filmI
                         <span className="section-title">Filme e sessão</span>
                         <div className="section-data">  
                             <span>{films[filmId-1].title}</span>
-                            <span>DATA E HORA</span>
+                            <span>{seats.day.date} - {seats.name}</span>
                         </div>
                     </div>
                     <div className="section">
                         <span className="section-title">Ingressos</span>
                         <div className="section-data">
-                            <span>Assento</span>
-                            <span>Assento</span>
+                            {numsSeat.map(numSeat => {
+                                return(
+                                    <span>Assento {numSeat}</span>
+                                    );
+                            }
+                            )}
+                            
                         </div>
                     </div>
                     <div className="section">
@@ -36,7 +40,7 @@ export default function Success({name, cpf, selected, films, filmSessions, filmI
                     </div> 
                 </div>
                 {/* <Link to="/"> */}
-                <button className="end-page" onClick={() => testarPagina()}>Voltar para Home</button>
+                <button className="end-page" >Voltar para Home</button>
                 {/* </Link> */}
                                    
             </div>
