@@ -9,7 +9,11 @@ export default function App(){
     const [films, setFilms] = React.useState([]);
     const [filmSessions, setFilmSessions] = React.useState([])
     const [filmId, setFilmId] = React.useState();
-    const [seats, setSeats] = React.useState()
+    const [seats, setSeats] = React.useState();
+    const [selected, setSelected] = React.useState([]);
+    const [name, setName] = React.useState([""]);
+    const [cpf, setCpf] = React.useState([""]);
+    
     useEffect(() => {
         const requestFilms = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/cineflex/movies")
         requestFilms.then(({ data }) => {
@@ -28,10 +32,10 @@ export default function App(){
                         <Film filmSessions={filmSessions} setFilmSessions={setFilmSessions} films={films} setFilmId={setFilmId} />
                     </Route>
                     <Route exact path="/assentos/:idSessao">
-                        <Session filmId={filmId} films={films} filmSessions={filmSessions} seats={seats} setSeats={setSeats}/>
+                        <Session filmId={filmId} films={films} filmSessions={filmSessions} seats={seats} setSeats={setSeats} selected={selected} setSelected={setSelected} name={name} setName={setName} cpf={cpf} setCpf={setCpf}/>
                     </Route>
                     <Route exact path="/sucesso">
-                        <Success />
+                        <Success name={name} cpf={cpf} selected={selected} films={films} filmSessions={filmSessions} filmId={filmId}/>
                     </Route>
                 </Switch>
             </BrowserRouter>

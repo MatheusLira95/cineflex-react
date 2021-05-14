@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import TopBar from "./TopBar"
-import Button from "./Button";
 
-export default function Success(){
+
+export default function Success({name, cpf, selected, films, filmSessions, filmId}){
+    function testarPagina(){
+        console.log(filmSessions)
+    }
+
     return(
         <>
             <TopBar />
@@ -12,7 +16,7 @@ export default function Success(){
                     <div className="section">
                         <span className="section-title">Filme e sessão</span>
                         <div className="section-data">  
-                            <span>NOME DO FILME</span>
+                            <span>{films[filmId-1].title}</span>
                             <span>DATA E HORA</span>
                         </div>
                     </div>
@@ -26,14 +30,14 @@ export default function Success(){
                     <div className="section">
                         <span className="section-title">Comprador</span>
                         <div className="section-data">  
-                            <span>Nome: NOME DA PESSOA</span>
-                            <span>CPF: 123.456.789-10</span>
+                            <span>Nome: {name}</span>
+                            <span>CPF: {cpf}</span>
                         </div>
                     </div> 
                 </div>
-                <Link to="/">
-                    <Button>Voltar para Home</Button>
-                </Link>
+                {/* <Link to="/"> */}
+                <button className="end-page" onClick={() => testarPagina()}>Voltar para Home</button>
+                {/* </Link> */}
                                    
             </div>
         </>
