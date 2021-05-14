@@ -36,7 +36,7 @@ export default function App(){
                         <Session filmId={filmId} films={films} filmSessions={filmSessions} seats={seats} setSeats={setSeats} selected={selected} setSelected={setSelected} name={name} setName={setName} cpf={cpf} setCpf={setCpf} setNumsSeat={setNumsSeat} numsSeat={numsSeat}/>
                     </Route>
                     <Route exact path="/sucesso">
-                        <Success name={name} cpf={cpf} selected={selected} seats={seats} films={films} filmSessions={filmSessions} filmId={filmId} numsSeat={numsSeat}/>
+                        <Success setFilms={setFilms} setFilmSessions={setFilmSessions} setFilmId={setFilmId} setSeats={setSeats} setSelected={setSelected} setNumsSeat={setNumsSeat} setName={setName} setCpf={setCpf} name={name} cpf={cpf} selected={selected} seats={seats} films={films} filmSessions={filmSessions} filmId={filmId} numsSeat={numsSeat}/>
                     </Route>
                 </Switch>
             </BrowserRouter>

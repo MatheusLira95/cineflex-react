@@ -39,11 +39,11 @@ export default function Session({ filmId, films, setSeats, seats, selected, setS
             setNumsSeat([...numsSeat])
         }
     }
-    console.log(numsSeat) 
+    
     function checkOut(){
         const data = {ids: selected, name: name, cpf: cpf};
         const requestCheckOut = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/cineflex/seats/book-many', data)
-        requestCheckOut.then(() => console.log("Success"))
+        requestCheckOut.then(() => alert("Confira os dados do seu pedido!"))
     }
     function validateSeats(){
         const arr = [];

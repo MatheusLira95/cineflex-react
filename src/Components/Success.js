@@ -3,9 +3,18 @@ import { Link } from "react-router-dom";
 import TopBar from "./TopBar"
 
 
-export default function Success({name, cpf, seats, films, filmId, numsSeat}){
+export default function Success({setFilms, setFilmSessions, setFilmId, setSeats, setSelected, setNumsSeat, setName, setCpf, name, cpf, seats, films, filmId, numsSeat}){
     
-    
+    function clearStates(){
+        setFilmSessions([]);
+        setFilmId();
+        setSeats();
+        setSelected([]);
+        setName([""]);
+        setCpf([""]);
+        setNumsSeat([]);
+    };
+
     return(
         <>
             <TopBar />
@@ -39,9 +48,9 @@ export default function Success({name, cpf, seats, films, filmId, numsSeat}){
                         </div>
                     </div> 
                 </div>
-                {/* <Link to="/"> */}
-                <button className="end-page" >Voltar para Home</button>
-                {/* </Link> */}
+                <Link to="/">
+                <button className="end-page" onClick={() => clearStates()} >Voltar para Home</button>
+                </Link>
                                    
             </div>
         </>
